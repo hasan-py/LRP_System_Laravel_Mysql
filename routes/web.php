@@ -24,6 +24,8 @@ Route::group(['middleware'=>['loginCheck']],function(){
 	Route::get('profiles','Profiles@profile');
 	Route::get('/','WelcomeController@home');
 	Route::get('flash','Profiles@profile');
+	Route::get('/db','Profiles@db');
+	Route::post('fileupload','Profiles@fileupload');
 });
 
 

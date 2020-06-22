@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class Profiles extends Controller
 {
@@ -30,6 +31,15 @@ class Profiles extends Controller
     		// return $req->session()->get('data');
 		}
 
+    }
+
+    function fileupload(Request $request){
+        $request->image->store('public');
+        return "successs";
+    }
+
+    function db(Request $request){
+        return DB::select("SELECT * FROM `users`");
     }
 }
 
