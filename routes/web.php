@@ -12,7 +12,7 @@ Route::get('welcome/{name}',function($name){
 Route::Redirect('/','welcome');
 Route::permanentRedirect('/','welcome');*/
 
-
+use Illuminate\Http\Request;
 
 // Route::get('welcome','WelcomeController@welcome');
 // Route::post('form','WelcomeController@form');
@@ -25,7 +25,22 @@ Route::group(['middleware'=>['loginCheck']],function(){
 	Route::get('/','WelcomeController@home');
 	Route::get('flash','Profiles@profile');
 	Route::get('/db','Profiles@db');
-	Route::post('fileupload','Profiles@fileupload');
+});
+
+
+//eita try koren bhai!
+
+Route::view('fileupload','profile');
+Route::post('fileupload',function(Request $request){
+	 	$img->role_id = $request->input('image');
+        if ($request->hasfile('image')) {
+        $file = $request->file('image');
+        $extention = $file->getClientOriginalExtension(); // get img extension
+        $filename = time() . '.' . $extention;
+        $file->move('upload/profile_image/',$filename);
+        $img->image = $filename;
+        }
+        return "Success .";
 });
 
 

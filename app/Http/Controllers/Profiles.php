@@ -34,8 +34,19 @@ class Profiles extends Controller
     }
 
     function fileupload(Request $request){
-        $request->image->store('public');
-        return "successs";
+        $img->role_id = $request->input('image');
+        if ($request->hasfile('image')) {
+        $file = $request->file('image');
+        $extention = $file->getClientOriginalExtension(); // get img extension
+        $filename = time() . '.' . $extention;
+        $file->move('upload/profile_image/',$filename);
+        $img->image = $filename;
+        }else{
+        return $request;
+        $img->image = '';
+        }
+        $img->save();
+        return redirect()->back()->with('success','Image Inserted SuccessFully....');
     }
 
     function db(Request $request){
