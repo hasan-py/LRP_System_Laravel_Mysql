@@ -34,23 +34,62 @@ class Profiles extends Controller
     }
 
     function fileupload(Request $request){
-        $img->role_id = $request->input('image');
-        if ($request->hasfile('image')) {
-        $file = $request->file('image');
-        $extention = $file->getClientOriginalExtension(); // get img extension
-        $filename = time() . '.' . $extention;
-        $file->move('upload/profile_image/',$filename);
-        $img->image = $filename;
-        }else{
-        return $request;
-        $img->image = '';
-        }
-        $img->save();
-        return redirect()->back()->with('success','Image Inserted SuccessFully....');
+        $path = $request->file('image')->store('avatars');
+        return ['path'=>$path,"success"=>"Success"];
+    }
+    
+
+    // Query Builder Function
+    function db(){
+        return DB::table('users')->get();
+        /*
+
+        // Raw Sql 
+        return DB::select("SELECT * FROM users");
+
+        // Get Method For getting All data from database
+        return DB::table('users')->get();
+
+        // Get With WHERE method
+        return DB::table('users')->where('id','1')->get();
+
+        // Count & Find & First
+        return DB::table('users')->count();
+        return DB::table('users')->first();
+        $data =  DB::table('users')->find(1); // Its return a array
+        print_r($data);
+    
+        // =========3 Major Oparations============
+
+        // Delete
+        return DB::table('users')->where('id',6)->delete();
+        
+
+        // Insert
+        return DB::table('users')->insert([
+            "name"=>"Emon",
+            "email"=>"emon55@gmail.com",
+            "password"=>"fjkagsfjafuafasjkfasj8948937"
+        ]);
+
+        // Update
+        return DB::table('users')->where('id',9)->update([
+            "password"=>"passwordforid"
+        ]);
+
+        */
+
     }
 
-    function db(Request $request){
-        return DB::select("SELECT * FROM `users`");
+    // Join Query
+    function join(){
+        $data =  DB::table('users')
+        ->leftJoin('profiles','users.id','=','profiles.user_id')
+        // ->select('users.name', 'users.email', 'profiles.bio')
+        // ->where('users.id',9)
+        ->get();
+
+        return view('database.db',["data"=>$data]);
     }
 }
 
