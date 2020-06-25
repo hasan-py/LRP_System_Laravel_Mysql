@@ -13,4 +13,4 @@
 	<input type="submit" value="Login">
 </form>
 
-@include('footer')
+@include('partials.footer')

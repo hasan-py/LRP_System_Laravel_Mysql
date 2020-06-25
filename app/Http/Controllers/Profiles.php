@@ -83,11 +83,21 @@ class Profiles extends Controller
 
     // Join Query
     function join(){
+
+        // Left Join Query
+        /*      
         $data =  DB::table('users')
         ->leftJoin('profiles','users.id','=','profiles.user_id')
-        // ->select('users.name', 'users.email', 'profiles.bio')
-        // ->where('users.id',9)
+        ->select('users.name', 'users.email', 'profiles.bio')
+        ->where('users.id',9)
         ->get();
+        */
+    
+
+        // Database Paginations
+        $data =  DB::table('users')
+        ->leftJoin('profiles','users.id','=','profiles.user_id')
+        ->simplePaginate(1);
 
         return view('database.db',["data"=>$data]);
     }

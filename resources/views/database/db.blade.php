@@ -12,3 +12,5 @@
 	@endforeach
 
 @endif
+
+<div style="list-style-type:none;">{{ $data->links() }}</div>

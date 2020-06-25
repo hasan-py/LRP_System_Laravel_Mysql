@@ -16,6 +16,9 @@ Route::group(['middleware'=>['loginCheck']],function(){
 	// File upload
 	Route::view('fileupload','profile');
 	Route::post('fileupload','Profiles@fileupload');
+
+	//Model View
+	Route::get('/product','productController@index');
 });
 
 // Before Login

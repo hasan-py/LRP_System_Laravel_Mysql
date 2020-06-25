@@ -1,4 +1,4 @@
-@include('header')
+@include('partials.header')
 <title>Home</title>
 <h1>Profile</h1>
 <h3> Welcome, {{ session('data')['username'] }} </h3>
@@ -22,4 +22,4 @@
 <br>
 <br>
 
-@include('footer')
+@include('partials.footer')

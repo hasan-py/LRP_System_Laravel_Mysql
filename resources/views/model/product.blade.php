@@ -1,6 +1,9 @@
 @include('partials.header')
-<title>Home</title>
+<title>Product</title>
 
-<h1>Home Page</h1>
+<h1>Product Page</h1>
+
+
+
 
 @include('partials.footer')
