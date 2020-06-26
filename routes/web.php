@@ -19,6 +19,9 @@ Route::group(['middleware'=>['loginCheck']],function(){
 
 	//Model View
 	Route::get('/product','productController@index');
+
+	//Resource Controller
+	Route::resource('post','PostController');
 });
 
 // Before Login
